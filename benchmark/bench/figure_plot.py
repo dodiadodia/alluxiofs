@@ -2,7 +2,7 @@ import argparse
 
 import matplotlib
 
-matplotlib.use("TkAgg")
+matplotlib.use("Agg")
 import pandas as pd
 import matplotlib.pyplot as plt
 import numpy as np
@@ -21,6 +21,8 @@ def convert_to_numeric(bw_str):
         value = float(bw_str.split("MiB/s")[0])
     elif "KiB/s" in bw_str:
         value = float(bw_str.split("KiB/s")[0]) / 1024
+    elif "GiB/s" in bw_str:
+        value = float(bw_str.split("GiB/s")[0]) * 1024
     return value
 
 
@@ -106,7 +108,7 @@ def plot_show(fuse_df, fsspec_df):
 
     # Adjust layout to prevent overlap
     plt.tight_layout()
-    plt.show()
+    plt.savefig("./output.png")
 
 
 def main():
